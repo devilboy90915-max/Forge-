@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FORGE — Turn Ideas Into Apps</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">FORGE<span>.</span></div>
+
+    <button class="version">V1</button>
+  </header>
+
+
+  <main class="hero">
+
+    <div class="badge">⚡ AI APP BUILDER</div>
+
+    <h1>
+      Turn Your<br>
+      <span>Ideas Into Apps.</span>
+    </h1>
+
+    <p class="subtitle">
+      Describe your idea. FORGE analyzes it, improves it,
+      and turns it into a real app concept.
+    </p>
+
+
+    <section class="forge-box">
+
+      <div class="box-header">
+        <span>💡 Your Idea</span>
+        <span class="counter">0 / 1000</span>
+      </div>
+
+      <textarea
+        id="ideaInput"
+        maxlength="1000"
+        placeholder="Example: I want an app that helps students study better..."
+      ></textarea>
+
+      <div class="box-footer">
+        <span class="hint">Be as creative as you want.</span>
+
+        <button id="forgeButton">
+          FORGE IT ⚡
+        </button>
+      </div>
+
+    </section>
+
+
+    <section id="result" class="result hidden">
+
+      <div class="result-title">
+        <span>🔥 FORGED RESULT</span>
+      </div>
+
+      <div id="resultContent"></div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>FORGE — Turn Ideas Into Apps</p>
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
