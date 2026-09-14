@@ -3,71 +3,428 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORGE — Turn Ideas Into Apps</title>
+  <title>FORGE — AI App Builder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <header class="navbar">
-    <div class="logo">FORGE<span>.</span></div>
-    <button class="version">V1</button>
-  </header>
+  <div class="app">
 
-  <main class="hero">
-
-    <div class="badge">⚡ AI APP BUILDER</div>
-
-    <h1>
-      Turn Your<br>
-      <span>Ideas Into Apps.</span>
-    </h1>
-
-    <p class="subtitle">
-      Describe your idea. FORGE analyzes it, improves it,
-      and turns it into a real app concept.
-    </p>
-
-    <section class="forge-box">
-
-      <div class="box-header">
-        <span>💡 Your Idea</span>
-        <span class="counter">0 / 1000</span>
+    <!-- TOP NAV -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <span>FORGE</span>
       </div>
 
-      <textarea
-        id="ideaInput"
-        maxlength="1000"
-        placeholder="Example: I want an app that helps students study better..."
-      ></textarea>
-
-      <div class="box-footer">
-        <span class="hint">Be as creative as you want.</span>
-
-        <button id="forgeButton">
-          FORGE IT ⚡
+      <nav class="nav-links">
+        <button class="nav-item active" data-page="builder">
+          <span>🏗️</span>
+          App Builder
         </button>
+
+        <button class="nav-item" data-page="chat">
+          <span>💬</span>
+          AI Chat
+        </button>
+
+        <button class="nav-item" data-page="projects">
+          <span>📁</span>
+          My Projects
+        </button>
+      </nav>
+
+      <div class="nav-status">
+        <span class="status-dot"></span>
+        Forge Ready
       </div>
+    </header>
 
-    </section>
 
-    <section id="result" class="result hidden">
+    <!-- MAIN -->
+    <main class="main-content">
 
-      <div class="result-title">
-        <span>🔥 FORGED RESULT</span>
-      </div>
+      <!-- BUILDER PAGE -->
+      <section id="builderPage" class="page active-page">
 
-      <div id="resultContent"></div>
+        <div class="hero">
 
-    </section>
+          <div class="hero-badge">
+            <span>✦</span>
+            AI APP BUILDER
+          </div>
 
-  </main>
+          <h1>
+            What do you want<br>
+            <span>to build?</span>
+          </h1>
 
-  <footer>
-    <p>FORGE — Turn Ideas Into Apps</p>
-  </footer>
+          <p class="hero-subtitle">
+            Describe your app idea. Forge will understand your requirements,
+            ask the right questions, and turn your idea into a real app.
+          </p>
+
+        </div>
+
+
+        <!-- IDEA INPUT -->
+        <section class="idea-card">
+
+          <div class="card-top">
+            <div>
+              <span class="card-label">YOUR APP IDEA</span>
+              <h2>Tell Forge what you're imagining.</h2>
+            </div>
+
+            <span id="ideaCounter">0 / 2000</span>
+          </div>
+
+
+          <textarea
+            id="ideaInput"
+            maxlength="2000"
+            placeholder="Example: Create a study app where students can add subjects, make tasks, track their progress and get reminders..."
+          ></textarea>
+
+
+          <div class="input-tools">
+
+            <div class="attachment-tools">
+
+              <button class="tool-button" id="addFileButton" type="button">
+                ＋ Add file
+              </button>
+
+              <button class="tool-button" id="addImageButton" type="button">
+                ◇ Reference image
+              </button>
+
+              <input
+                type="file"
+                id="fileInput"
+                hidden
+              >
+
+              <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                hidden
+              >
+
+            </div>
+
+            <span class="input-hint">
+              Be specific or start with a simple idea.
+            </span>
+
+          </div>
+
+
+          <button id="startForgeButton" class="forge-button" type="button">
+            <span>Build with Forge</span>
+            <span class="button-arrow">→</span>
+          </button>
+
+        </section>
+
+
+        <!-- SMART QUESTIONS -->
+        <section id="questionsSection" class="workflow-section hidden">
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">STEP 01</span>
+              <h2>Let's understand your app.</h2>
+              <p>
+                Forge needs a few details before building.
+              </p>
+            </div>
+
+            <div class="step-indicator">
+              <span class="step-active">1</span>
+              <span>2</span>
+              <span>3</span>
+            </div>
+          </div>
+
+
+          <div id="questionsContainer" class="questions-container"></div>
+
+
+          <button id="continueButton" class="primary-button" type="button">
+            Continue
+            <span>→</span>
+          </button>
+
+        </section>
+
+
+        <!-- BLUEPRINT -->
+        <section id="blueprintSection" class="workflow-section hidden">
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">STEP 02</span>
+              <h2>Your app blueprint.</h2>
+              <p>
+                Forge has understood the requirements.
+              </p>
+            </div>
+          </div>
+
+
+          <div class="blueprint-grid">
+
+            <div class="blueprint-card">
+              <span class="blueprint-icon">◎</span>
+              <span class="blueprint-label">APP</span>
+              <h3 id="blueprintName">Your App</h3>
+              <p id="blueprintDescription">
+                Your application will be generated from the requirements above.
+              </p>
+            </div>
+
+
+            <div class="blueprint-card">
+              <span class="blueprint-icon">◇</span>
+              <span class="blueprint-label">FEATURES</span>
+              <div id="blueprintFeatures"></div>
+            </div>
+
+
+            <div class="blueprint-card">
+              <span class="blueprint-icon">▣</span>
+              <span class="blueprint-label">SCREENS</span>
+              <div id="blueprintScreens"></div>
+            </div>
+
+
+            <div class="blueprint-card">
+              <span class="blueprint-icon">⚙</span>
+              <span class="blueprint-label">BUILD PLAN</span>
+              <p>
+                Interface → App logic → Data → Testing → Export
+              </p>
+            </div>
+
+          </div>
+
+
+          <button id="buildAppButton" class="primary-button build-button" type="button">
+            <span>Generate App</span>
+            <span>⚡</span>
+          </button>
+
+        </section>
+
+
+        <!-- BUILD WORKSPACE -->
+        <section id="workspaceSection" class="workspace hidden">
+
+          <div class="workspace-header">
+
+            <div>
+              <span class="eyebrow">BUILDING</span>
+              <h2 id="workspaceTitle">Your App</h2>
+            </div>
+
+            <div class="workspace-actions">
+              <button id="testButton" class="workspace-button">
+                Test
+              </button>
+
+              <button id="exportButton" class="workspace-button primary-workspace">
+                Export
+              </button>
+            </div>
+
+          </div>
+
+
+          <div class="workspace-grid">
+
+            <!-- PREVIEW -->
+            <div class="preview-panel">
+
+              <div class="panel-header">
+                <span>LIVE PREVIEW</span>
+
+                <div class="preview-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+
+              <div class="preview-area">
+
+                <div class="mock-app">
+
+                  <div class="mock-topbar">
+                    <strong id="previewAppName">Your App</strong>
+                    <span>•••</span>
+                  </div>
+
+                  <div class="mock-content">
+
+                    <div class="mock-welcome">
+                      <small>WELCOME</small>
+                      <h3 id="previewHeading">
+                        Your app is being built.
+                      </h3>
+                    </div>
+
+                    <div id="previewCards" class="mock-cards"></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- FORGE AI PANEL -->
+            <aside class="ai-panel">
+
+              <div class="panel-header">
+                <span>FORGE AI</span>
+                <span class="ai-online">
+                  <i></i> Online
+                </span>
+              </div>
+
+              <div id="buildLog" class="build-log">
+
+                <div class="log-item">
+                  <span class="log-check">✓</span>
+                  Requirements understood
+                </div>
+
+                <div class="log-item">
+                  <span class="log-check">✓</span>
+                  Blueprint created
+                </div>
+
+                <div class="log-item building-log">
+                  <span class="loading-circle"></span>
+                  Generating application...
+                </div>
+
+              </div>
+
+
+              <div class="ai-input-area">
+
+                <input
+                  id="editInput"
+                  type="text"
+                  placeholder="Ask Forge to change something..."
+                >
+
+                <button id="editButton" type="button">
+                  →
+                </button>
+
+              </div>
+
+            </aside>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- AI CHAT PAGE -->
+      <section id="chatPage" class="page">
+
+        <div class="simple-page">
+
+          <span class="hero-badge">💬 FORGE AI</span>
+
+          <h1>AI <span>Chat.</span></h1>
+
+          <p>
+            Talk with Forge about your app, features, ideas and improvements.
+          </p>
+
+          <div class="chat-box">
+
+            <div id="chatMessages" class="chat-messages">
+              <div class="chat-message forge-message">
+                Hey! I'm Forge. Tell me what you want to build.
+              </div>
+            </div>
+
+            <div class="chat-input">
+              <input
+                id="chatInput"
+                type="text"
+                placeholder="Ask Forge anything..."
+              >
+
+              <button id="chatSendButton" type="button">
+                →
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PROJECTS PAGE -->
+      <section id="projectsPage" class="page">
+
+        <div class="simple-page">
+
+          <span class="hero-badge">📁 YOUR WORKSPACE</span>
+
+          <h1>My <span>Projects.</span></h1>
+
+          <p>
+            Your Forge apps will appear here.
+          </p>
+
+          <div id="projectsContainer" class="projects-empty">
+
+            <div class="empty-icon">＋</div>
+
+            <h3>No projects yet</h3>
+
+            <p>
+              Build your first app and it will appear here.
+            </p>
+
+            <button id="newProjectButton" class="primary-button">
+              Create an App →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>FORGE</span>
+      <span>Turn ideas into apps.</span>
+    </footer>
+
+  </div>
 
   <script src="script.js"></script>
 
 </body>
-</html>
+            </html>
